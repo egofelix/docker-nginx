@@ -9,7 +9,9 @@ RUN apk --no-cache add \
 	mkdir -p /run/nginx/ /etc/nginx/sites-enabled/ /var/log/nginx/
 
 # Install config
-COPY nginx.conf /etc/nginx
-	
+COPY nginx.conf /etc/nginx/nginx.conf
+
+VOLUME ["/etc/nginx/vhosts", "/etc/nginx/includes", "/etc/nginx/certs", "/etc/nginx/conf"]
+
 # Entry
 ENTRYPOINT /usr/sbin/nginx -g 'daemon off;'
