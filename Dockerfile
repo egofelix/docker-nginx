@@ -14,4 +14,5 @@ COPY nginx.conf /etc/nginx/nginx.conf
 VOLUME ["/etc/nginx/vhosts", "/etc/nginx/includes", "/etc/nginx/certs", "/etc/nginx/conf"]
 
 # Entry
+HEALTHCHECK  --interval=30s --timeout=5s CMD wget --quiet --tries=1 --spider http://127.0.0.1/ || exit 1
 ENTRYPOINT /usr/sbin/nginx -g 'daemon off;'
