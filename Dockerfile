@@ -4,7 +4,7 @@ MAINTAINER EgoFelix <docker@egofelix.de>
 
 # Install nginx
 RUN apk --no-cache add \
-    nginx \
+    nginx nginx-mod-stream \
 	&& \
 	mkdir -p /run/nginx/ /etc/nginx/sites-enabled/ /var/log/nginx/
 
