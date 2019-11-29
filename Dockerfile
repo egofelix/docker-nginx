@@ -7,7 +7,8 @@ RUN apk --no-cache add \
     nginx nginx-mod-stream \
     && \
     mkdir -p /run/nginx/ /etc/nginx/sites-enabled/ /var/log/nginx/ && \
-    touch /etc/nginx/global.conf
+    touch /etc/nginx/global.conf && \
+    touch /etc/nginx/modules.conf
 
 # Install config
 COPY nginx.conf /etc/nginx/nginx.conf
