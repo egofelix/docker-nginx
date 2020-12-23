@@ -1,0 +1,15 @@
+FROM alpine AS prep
+ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v3.0.0%2Bresin/qemu-3.0.0+resin-arm.tar.gz
+RUN apk add curl && curl -L ${QEMU_URL} | tar zxvf - -C . --strip-components 1
+
+FROM arm32v7/alpine
+COPY --from=prep qemu-arm-static /usr/bin
+
+MAINTAINER EgoFelix <docker@egofelix.de>
+
+# Install nginx
+RUN apk --no-cache add nginx wget
+
+# Entry
+HEALTHCHECK  --interval=30s --timeout=5s CMD wget --quiet --tries=1 --spider http://127.0.0.1/ || exit 1
+ENTRYPOINT /usr/sbin/nginx -g 'daemon off;'
